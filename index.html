@@ -1,38 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>The Retro Fit King</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Retro Fit King | Heating & Cooling</title>
+
+  <style>
+    :root{
+      --bg:#0b0f12;
+      --panel:#10171c;
+      --panel2:#0e1419;
+      --text:#e9f0f5;
+      --muted:#9fb0be;
+      --line:rgba(255,255,255,.08);
+      --accent:#4CAF50;
+      --accent2:#2dd4bf;
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius: 18px;
+      --max: 1080px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 50% -100px, rgba(45,212,191,.18), transparent 60%),
+                  radial-gradient(900px 600px at 20% 0px, rgba(76,175,80,.16), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height:1.5;
+    }
+
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,18,.7);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+    }
+    .brand img{
+      width:38px; height:38px; object-fit:contain;
+      border-radius:10px;
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      padding:6px;
+    }
+    .brand .name{font-weight:800; letter-spacing:.2px}
+    .brand .tag{font-size:12px; color:var(--muted); margin-top:2px}
+
+    .nav-links{
+      display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+      font-size:14px; color:var(--muted);
+    }
+    .nav-links a{
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.03);
+    }
+
+    .hero{
+      padding:44px 0 22px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main{
+      padding:26px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-main:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 200px at 20% 10%, rgba(45,212,191,.22), transparent 55%),
+                  radial-gradient(600px 300px at 85% 0%, rgba(76,175,80,.18), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .hero-main > *{position:relative; z-index:1;}
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size:12px; color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      margin-bottom:12px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(76,175,80,.14);
+    }
+    h1{
+      margin:10px 0 6px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height:1.05;
+      letter-spacing: .2px;
+    }
+    .sub{
+      color:var(--muted);
+      font-size: clamp(14px, 2vw, 18px);
+      margin: 8px 0 18px;
+      max-width: 60ch;
+    }
+
+    .cta-row{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 16px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      text-decoration:none;
+      font-weight:700;
+      background: rgba(255,255,255,.03);
+    }
+    .btn:hover{background: rgba(255,255,255,.06)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(76,175,80,.95), rgba(52,168,83,.85));
+      border-color: rgba(76,175,80,.45);
+      color: #061108;
+    }
+    .btn.primary:hover{
+      filter: brightness(1.02);
+    }
+    .btn .icon{opacity:.9}
+
+    .hero-side{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .logo-stack{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .logo-tile{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:92px;
+    }
+    .logo-tile img{
+      max-width:100%;
+      max-height:64px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+
+    .mini{
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.2);
+    }
+    .mini .label{font-size:12px; color:var(--muted)}
+    .mini .big{font-weight:900; font-size:18px; margin-top:6px}
+    .mini .small{color:var(--muted); font-size:13px; margin-top:4px}
+
+    .section{
+      padding: 26px 0;
+    }
+    .section h2{
+      margin:0 0 8px;
+      font-size: 24px;
+      letter-spacing:.2px;
+    }
+    .section p.lead{
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 75ch;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .info-card{
+      padding:16px;
+    }
+    .info-card h3{
+      margin: 6px 0 6px;
+      font-size: 16px;
+    }
+    .info-card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      color: var(--muted);
+      padding:7px 10px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .list{
+      margin: 10px 0 0;
+      padding:0;
+      list-style:none;
+      color: var(--muted);
+      font-size:14px;
+    }
+    .list li{
+      padding:10px 0;
+      border-top:1px solid var(--line);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .tick{
+      width:18px; height:18px;
+      border-radius:6px;
+      background: rgba(76,175,80,.18);
+      border:1px solid rgba(76,175,80,.35);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      margin-top:2px;
+    }
+
+    .cta-band{
+      padding:18px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      background: linear-gradient(180deg, rgba(45,212,191,.12), rgba(255,255,255,.03));
+    }
+    .cta-band .left{
+      min-width: 220px;
+    }
+    .cta-band .left .top{
+      font-weight:900; font-size:18px;
+    }
+    .cta-band .left .bot{
+      color:var(--muted); font-size:14px; margin-top:4px;
+    }
+
+    .footer{
+      padding: 24px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 10px;
+    }
+    .footgrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:start;
+    }
+    .footgrid a{color: var(--text); text-decoration:none}
+    .footgrid a:hover{text-decoration:underline}
+    .tiny{font-size:12px; color:var(--muted); margin-top:8px}
+
+    /* responsive */
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns: 1fr; }
+      .grid3{grid-template-columns: 1fr; }
+      .split{grid-template-columns: 1fr; }
+      .footgrid{grid-template-columns: 1fr; }
+      .nav-links{display:none;}
+    }
+  </style>
 </head>
 
-<body style="font-family: Arial; text-align: center; background-color:#111; color:white; padding:40px;">
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="The Retro Fit King Home">
+        <!-- Uses logo1.png as the small nav icon -->
+        <img src="logo1.png" alt="TRFK logo" />
+        <div>
+          <div class="name">The Retro Fit King</div>
+          <div class="tag">Heating & Cooling • Servicing RI & MA</div>
+        </div>
+      </a>
 
-  <img src="logo1.png" Width="130" style="margin-bottom:20px:">
-  
-<h1>The Retro Fit King</h1>
-<p>Servicing RI & MA</p>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#why">Why TRFK</a>
+        <a href="#areas">Service Areas</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
 
-<hr style="margin:40px 0; border:1px solid #333;">
+  <!-- HERO -->
+  <div id="top" class="hero">
+    <div class="wrap hero-grid">
+      <div class="card hero-main">
+        <div class="kicker"><span class="dot"></span> Fast response • Clean installs • Respectful service</div>
 
-<h2>About Me</h2>
-<p>I’m building something great here.</p>
+        <h1>Retrofits done right.<br/>Comfort that lasts.</h1>
+        <p class="sub">
+          The Retro Fit King provides dependable heating & cooling solutions across <b>Rhode Island</b> and
+          <b>Massachusetts</b> — installs, service, maintenance, and upgrades with pride and precision.
+        </p>
 
-<button style="
-padding:15px 25px;
-font-size:16px;
-border:none;
-border-radius:8px;
-background-color:#4CAF50;
-color:white;
-cursor:pointer;">
-Coming Soon
-</button>
+        <div class="cta-row">
+          <!-- EDIT THESE LINKS -->
+          <a class="btn primary" href="tel:+1-000-000-0000">
+            <span class="icon">📞</span> Call Now
+          </a>
+          <a class="btn" href="mailto:theretrofitking@gmail.com">
+            <span class="icon">✉️</span> Email Us
+          </a>
+          <a class="btn" href="#contact">
+            <span class="icon">✅</span> Get a Quote
+          </a>
+        </div>
 
-<hr style="margin:40px 0; border:1px solid #333;">
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="badge">✅ Licensed & professional</span>
+          <span class="badge">🧰 Install • Repair • Maintenance</span>
+          <span class="badge">📍 RI + MA</span>
+        </div>
+      </div>
 
-<h3>Contact</h3>
-<p>Email: TheRetroFitKing@gmail.com</p>
+      <div class="card hero-side">
+        <div class="mini">
+          <div class="label">Brand Kit</div>
+          <div class="big">Your Logos, Clean Display</div>
+          <div class="small">Drop files as <b>logo1.png</b>, <b>logo2.png</b>, etc. (lowercase).</div>
+        </div>
 
+        <div class="logo-stack">
+          <div class="logo-tile"><img src="logo1.png" alt="Logo 1"></div>
+          <div class="logo-tile"><img src="logo2.png" alt="Logo 2"></div>
+          <div class="logo-tile"><img src="logo3.png" alt="Logo 3"></div>
+          <div class="logo-tile"><img src="logo4.png" alt="Logo 4"></div>
+        </div>
+
+        <div class="mini">
+          <div class="label">Quick Note</div>
+          <div class="small">
+            If a logo ever doesn’t show, it’s almost always a filename mismatch.
+            Keep it <b>lowercase</b> and match it exactly in the HTML.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div id="services" class="section">
+    <div class="wrap">
+      <h2>Services</h2>
+      <p class="lead">Clear, honest work with clean installs and reliable performance. Here’s what we handle.</p>
+
+      <div class="grid3">
+        <div class="card info-card">
+          <div class="badge">🔥 Heating</div>
+          <h3>Furnaces • Boilers • Heat Upgrades</h3>
+          <p>Repairs, replacements, and efficiency upgrades to keep your home warm and running right.</p>
+        </div>
+        <div class="card info-card">
+          <div class="badge">❄️ Cooling</div>
+          <h3>AC Service • Installs • Maintenance</h3>
+          <p>New systems, tune-ups, and fixes for strong airflow and dependable cooling all summer.</p>
+        </div>
+        <div class="card info-card">
+          <div class="badge">🧰 Retrofits</div>
+          <h3>Clean Replacements & System Upgrades</h3>
+          <p>Professional change-outs, better comfort, smarter layouts, and clean-looking finishes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <div id="why" class="section">
+    <div class="wrap split">
+      <div class="card info-card">
+        <h2 style="margin-top:0;">Why TRFK</h2>
+        <p class="lead" style="margin-bottom:0;">
+          You’re not just buying equipment — you’re buying peace of mind. We focus on workmanship, reliability,
+          and respect for your home.
+        </p>
+
+        <ul class="list">
+          <li><span class="tick">✅</span><span><b>Clean installs</b> — neat lines, proper supports, and professional finish.</span></li>
+          <li><span class="tick">✅</span><span><b>Transparent communication</b> — clear options, no confusing talk.</span></li>
+          <li><span class="tick">✅</span><span><b>Quality-first mindset</b> — built to last, tuned for performance.</span></li>
+          <li><span class="tick">✅</span><span><b>Local service</b> — Rhode Island and Massachusetts coverage.</span></li>
+        </ul>
+      </div>
+
+      <div class="card info-card">
+        <h2 style="margin-top:0;">Featured Logo</h2>
+        <p class="lead">This block uses your wider brand mark. Swap which logo you want here anytime.</p>
+
+        <div style="border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.03); padding:16px; display:flex; justify-content:center;">
+          <img src="logo5.png" alt="TRFK wide logo" style="max-width:100%; height:auto; object-fit:contain;">
+        </div>
+
+        <div class="cta-row" style="margin-top:14px;">
+          <a class="btn primary" href="#contact"><span class="icon">⚡</span> Request Service</a>
+          <a class="btn" href="tel:+1-000-000-0000"><span class="icon">📞</span> Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE AREAS -->
+  <div id="areas" class="section">
+    <div class="wrap">
+      <div class="card cta-band">
+        <div class="left">
+          <div class="top">Servicing Rhode Island & Massachusetts</div>
+          <div class="bot">Tell us your town and what you’re working on — we’ll take it from there.</div>
+        </div>
+        <div class="cta-row" style="margin:0;">
+          <a class="btn primary" href="mailto:theretrofitking@gmail.com"><span class="icon">✉️</span> Email for a Quote</a>
+          <a class="btn" href="#contact"><span class="icon">📍</span> Contact Info</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="section">
+    <div class="wrap split">
+      <div class="card info-card">
+        <h2 style="margin-top:0;">Contact</h2>
+        <p class="lead">Fastest way to reach us is call or email. Add your phone number below when ready.</p>
+
+        <!-- EDIT THESE -->
+        <div style="display:grid; gap:10px; margin-top:12px;">
+          <div class="mini">
+            <div class="label">Email</div>
+            <div class="big"><a href="mailto:theretrofitking@gmail.com" style="text-decoration:none; color:var(--text);">theretrofitking@gmail.com</a></div>
+          </div>
+
+          <div class="mini">
+            <div class="label">Phone</div>
+            <div class="big"><a href="tel:+1-000-000-0000" style="text-decoration:none; color:var(--text);">(000) 000-0000</a></div>
+            <div class="small">Update this number in the HTML when you’re ready.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card info-card">
+        <h2 style="margin-top:0;">Quick Quote</h2>
+        <p class="lead">Copy/paste this into an email to get a fast estimate reply.</p>
+
+        <div class="mini" style="white-space:pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; font-size:13px;">
+Name:
+Town/State:
+Service Needed: (install / repair / maintenance / upgrade)
+System Type: (heating / cooling / both)
+Best Time to Reach You:
+Notes:
+        </div>
+
+        <div class="cta-row" style="margin-top:14px;">
+          <a class="btn primary" href="mailto:theretrofitking@gmail.com?subject=TRFK%20Quote%20Request&body=Name%3A%0ATown%2FState%3A%0AService%20Needed%3A%0ASystem%20Type%3A%0ABest%20Time%20to%20Reach%20You%3A%0ANotes%3A%0A">
+            <span class="icon">✉️</span> Email This Form
+          </a>
+          <a class="btn" href="#top"><span class="icon">⬆️</span> Back to Top</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="wrap footgrid">
+      <div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <img src="logo1.png" alt="TRFK logo" style="width:44px; height:44px; object-fit:contain; border-radius:12px; border:1px solid var(--line); padding:6px; background:rgba(255,255,255,.03)">
+          <div>
+            <div style="font-weight:900; color:var(--text)">The Retro Fit King</div>
+            <div class="tiny">Heating & Cooling • RI & MA</div>
+          </div>
+        </div>
+        <div class="tiny">© <span id="yr"></span> TRFK. All rights reserved.</div>
+      </div>
+
+      <div>
+        <div style="font-weight:800; color:var(--text); margin-bottom:6px;">Quick Links</div>
+        <div class="tiny" style="display:grid; gap:6px;">
+          <a href="#services">Services</a>
+          <a href="#why">Why TRFK</a>
+          <a href="#contact">Contact</a>
+          <a href="mailto:theretrofitking@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // auto year
+    document.getElementById("yr").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
