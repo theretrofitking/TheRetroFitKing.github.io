@@ -1,125 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TRFK Heating & Cooling | RI & MA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRFK Heating & Cooling | RI & MA</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:#0f1418;
-      color:#ffffff;
-      text-align:center;
-    }
+<style>
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#0b1216; /* darker teal/black */
+  color:#ffffff;
+  text-align:center;
+}
 
-    .wrap{
-      max-width:720px;
-      margin:0 auto;
-      padding:44px 18px 28px;
-    }
+.wrap{
+  max-width:640px;
+  margin:auto;
+  padding:36px 16px 24px;
+}
 
-    /* Logo */
-    .logo{
-      max-width:min(520px, 92vw);
-      width:100%;
-      height:auto;
-      display:block;
-      margin:0 auto 22px;
-    }
+/* LOGO */
+.logo{
+  width:100%;
+  max-width:340px;   /* hard cap */
+  height:auto;
+  margin:0 auto 18px;
+  display:block;
+}
 
-    h1{
-      margin:0 0 8px;
-      font-size:28px;
-      letter-spacing:0.5px;
-    }
+/* Headline */
+h1{
+  margin:0 0 6px;
+  font-size:24px;
+  letter-spacing:0.4px;
+}
 
-    .sub{
-      margin:0 auto 22px;
-      max-width:52ch;
-      color:#a7b3be;
-      font-size:14px;
-      line-height:1.6;
-    }
+.sub{
+  margin:0 auto 18px;
+  max-width:48ch;
+  color:#9fb0bb;
+  font-size:14px;
+  line-height:1.5;
+}
 
-    .divider{
-      height:1px;
-      background:rgba(255,255,255,0.10);
-      margin:26px auto;
-      width:min(520px, 92vw);
-    }
+/* Divider */
+.divider{
+  height:1px;
+  background:rgba(255,255,255,0.12);
+  margin:22px auto;
+  width:90%;
+}
 
-    .btnrow{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
+/* Buttons */
+.btnrow{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
 
-    .btn{
-      display:inline-block;
-      padding:12px 16px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-      font-size:14px;
-      border:1px solid rgba(255,255,255,0.12);
-    }
+.btn{
+  padding:12px 16px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+}
 
-    .btn.primary{
-      background:#4CAF50;
-      color:#0a140c;
-      border-color:rgba(76,175,80,0.55);
-    }
+.primary{
+  background:#4CAF50;
+  color:#08120a;
+}
 
-    .btn.secondary{
-      background:rgba(255,255,255,0.06);
-      color:#ffffff;
-    }
+.secondary{
+  background:#1a2329;
+  color:white;
+  border:1px solid #2b3942;
+}
 
-    .small{
-      margin-top:18px;
-      color:#7f8b96;
-      font-size:12px;
-    }
+.small{
+  margin-top:16px;
+  font-size:12px;
+  color:#7c8b95;
+}
 
-    /* Make it feel nice on very small phones */
-    @media (max-width:360px){
-      h1{ font-size:24px; }
-      .sub{ font-size:13px; }
-    }
-  </style>
+/* Extra small phones */
+@media (max-width:380px){
+  .logo{ max-width:280px; }
+  h1{ font-size:22px; }
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- Logo -->
-    <img class="logo" src="logo1.png" alt="TRFK Heating & Cooling logo" />
+<div class="wrap">
 
-    <!-- Simple headline -->
-    <h1>Heating & Cooling</h1>
-    <p class="sub">
-      Servicing Rhode Island & Massachusetts.<br>
-      Install • Repair • Maintenance • Retrofits
-    </p>
+<img class="logo" src="logo.png" alt="TRFK Logo">
 
-    <div class="divider"></div>
+<h1>Heating & Cooling</h1>
+<p class="sub">
+Servicing Rhode Island & Massachusetts<br>
+Install • Repair • Maintenance • Retrofits
+</p>
 
-    <!-- Contact (edit phone if you want) -->
-    <div class="btnrow">
-      <a class="btn primary" href="mailto:theretrofitking@gmail.com">Email for a Quote</a>
-      <a class="btn secondary" href="tel:+10000000000">Call Now</a>
-    </div>
+<div class="divider"></div>
 
-    <div class="small">
-      © <span id="y"></span> TRFK • The Retro Fit King
-    </div>
-  </div>
+<div class="btnrow">
+<a class="btn primary" href="mailto:theretrofitking@gmail.com">Email for Quote</a>
+<a class="btn secondary" href="tel:+10000000000">Call Now</a>
+</div>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+<div class="small">© <span id="y"></span> The Retro Fit King</div>
+
+</div>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
